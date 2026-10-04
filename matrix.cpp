@@ -12,17 +12,17 @@ void delmat(int ** matr, size_t m) {
 
 // создание новой матрицы с обработкой ошибки выделения памяти
 int ** new_matrix(size_t m, size_t n) {
-    int ** arr = nullptr;
+    int ** matr = nullptr;
     size_t k = 0;
     try {
-        arr = new int*[m];
+        matr = new int*[m];
         for (k = 0; k < m; k++) {
-            arr[k] = new int[n];
+            matr[k] = new int[n];
         }
-        return arr;
+        return matr;
     }
     catch (const std::bad_alloc &e) {
-        delmat(arr, k);
+        delmat(matr, k);
         return nullptr;
     }
 }
