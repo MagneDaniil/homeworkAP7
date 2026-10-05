@@ -99,9 +99,12 @@ int main()
     // переприсваивание и вывод основной матрицы
     delmat(matr, m);
     matr = matr_t;
-    for (size_t i = 0; i < n; i++)
+    int m_0 = m;
+    m = n;
+    n = m_0;
+    for (size_t i = 0; i < m; i++)
     {
-        for (size_t j = 0; j < m; j++)
+        for (size_t j = 0; j < n; j++)
         {
             std::cout << matr[i][j] << " ";
         }
