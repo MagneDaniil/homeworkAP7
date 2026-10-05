@@ -13,6 +13,18 @@ void delmat(int **matr, size_t m)
     }
 }
 
+// транспанирование
+void transp(int **matr, int **matr_t, size_t n, size_t m)
+{
+    for (size_t i = 0; i < n; i++)
+    {
+        for (size_t j = 0; j < m; j++)
+        {
+            matr_t[i][j] = matr[j][i];
+        }
+    }
+}
+
 // создание новой матрицы с обработкой ошибки выделения памяти
 int **new_matrix(size_t m, size_t n)
 {
@@ -71,13 +83,7 @@ int main()
         delmat(matr, m);
         return 2;
     }
-    for (size_t i = 0; i < n; i++)
-    {
-        for (size_t j = 0; j < m; j++)
-        {
-            matr_t[i][j] = matr[j][i];
-        }
-    }
+    transp(matr, matr_t, n, m);
     // переприсваивание и вывод основной матрицы
     delmat(matr, m);
     matr = matr_t;
@@ -89,7 +95,6 @@ int main()
         }
         std::cout << "\n";
     }
-
     delmat(matr, n);
     return 0;
 }
