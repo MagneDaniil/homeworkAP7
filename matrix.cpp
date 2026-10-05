@@ -1,7 +1,8 @@
 #include <iostream>
 
 // освобождение памяти
-void delmat(int ** matr, size_t m) {
+void delmat(int ** matr, size_t m) 
+{
     if (matr != nullptr) {
         for (size_t i = 0; i < m; i++) {
             delete[] matr[i];
@@ -11,7 +12,8 @@ void delmat(int ** matr, size_t m) {
 }
 
 // создание новой матрицы с обработкой ошибки выделения памяти
-int ** new_matrix(size_t m, size_t n) {
+int ** new_matrix(size_t m, size_t n)
+{
     int ** matr = nullptr;
     size_t k = 0;
     try {
@@ -27,7 +29,8 @@ int ** new_matrix(size_t m, size_t n) {
     }
 }
 
-int main() {
+int main() 
+{
     // размерность матрицы
     size_t m = 1;
     size_t n = 1;
