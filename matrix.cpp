@@ -3,26 +3,41 @@
 // освобождение памяти
 void delmat(int **matr, size_t m)
 {
-    if (matr != nullptr)
+    for (size_t i = 0; i < m; i++)
     {
-        for (size_t i = 0; i < m; i++)
-        {
-            delete[] matr[i];
-        }
-        delete[] matr;
+        delete[] matr[i];
     }
+    delete[] matr;
 }
 
 // транспанирование
-void transp(int **matr, int **matr_t, size_t n, size_t m)
+void transp(int **matr, int **matr_t, size_t m, size_t n)
 {
-    for (size_t i = 0; i < n; i++)
+    for (size_t i = 0; i < m; i++)
     {
-        for (size_t j = 0; j < m; j++)
+        for (size_t j = 0; j < n; j++)
         {
-            matr_t[i][j] = matr[j][i];
+            matr_t[j][i] = matr[i][j];
         }
     }
+}
+
+// заполнение матрицы
+int **input_matr(int **matr, size_t m, size_t n)
+{
+    for (size_t i = 0; i < m; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            if (!(std::cin >> matr[i][j]))
+            {
+                std::cerr << "Matrix input failed.\n";
+                delmat(matr, m);
+                return nullptr;
+            }
+        }
+    }
+    return matr;
 }
 
 // создание новой матрицы с обработкой ошибки выделения памяти
@@ -56,6 +71,7 @@ int main()
         std::cerr << "Matrix input failed.\n";
         return 1;
     }
+
     // создание и заполнение основной матрицы
     int **matr = new_matrix(m, n);
     if (matr == nullptr)
@@ -63,18 +79,13 @@ int main()
         std::cerr << "Memory error.\n";
         return 2;
     }
-    for (size_t i = 0; i < m; i++)
+    matr = input_matr(matr, m, n);
+    if (matr == nullptr)
     {
-        for (size_t j = 0; j < n; j++)
-        {
-            if (!(std::cin >> matr[i][j]))
-            {
-                std::cerr << "Matrix input failed.\n";
-                delmat(matr, m);
-                return 1;
-            }
-        }
+        std::cerr << "Matrix input failed.\n";
+        return 1;
     }
+
     // создание и заполнение транспонированной матрицы
     int **matr_t = new_matrix(n, m);
     if (matr_t == nullptr)
@@ -83,7 +94,8 @@ int main()
         delmat(matr, m);
         return 2;
     }
-    transp(matr, matr_t, n, m);
+    transp(matr, matr_t, m, n);
+
     // переприсваивание и вывод основной матрицы
     delmat(matr, m);
     matr = matr_t;
