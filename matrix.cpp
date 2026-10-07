@@ -94,7 +94,7 @@ int main()
         delmat(matr, m);
         return 2;
     }
-    transp(matr, matr_t, m, n);
+    transp(matr, matr_t, m, n); 
 
     // переприсваивание и вывод основной матрицы
     delmat(matr, m);
@@ -110,6 +110,6 @@ int main()
         }
         std::cout << "\n";
     }
-    delmat(matr, n);
+    delmat(matr, m);
     return 0;
 }
