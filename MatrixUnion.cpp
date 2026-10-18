@@ -203,6 +203,7 @@ int main()
         std::cout << "\n";
     }
 
+    // удаление матриц
     del_matrix(n1, lhs);
     del_matrix(n2, rhs);
     del_matrix(n_max, comb_matrix);
