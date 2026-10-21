@@ -46,9 +46,6 @@ int **concat_rows(const int *const *lhs, size_t n1, size_t m1, const int *const 
             {
                 comb_matrix[i][j] = lhs[i][j];
             }
-        }
-        for (int i = 0; i < n_min; i++)
-        {
             for (int j = 0; j < m2; j++)
             {
                 comb_matrix[i][m1 + j] = rhs[i][j];
@@ -58,7 +55,7 @@ int **concat_rows(const int *const *lhs, size_t n1, size_t m1, const int *const 
         {
             for (int i = n_min; i < n_max; i++)
             {
-                for (int j = 0; j < m1; j++)
+                for (int j = 0; j < m_max; j++)
                 {
                     comb_matrix[i][j] = lhs[i][j];
                 }
@@ -68,7 +65,7 @@ int **concat_rows(const int *const *lhs, size_t n1, size_t m1, const int *const 
         {
             for (int i = n_min; i < n_max; i++)
             {
-                for (int j = 0; j < m2; j++)
+                for (int j = 0; j < m_max; j++)
                 {
                     comb_matrix[i][j] = rhs[i][j];
                 }
@@ -133,7 +130,7 @@ int main()
         std::cerr << "Bad matrix dimensions.\n";
         return input_error;
     }
-    size_t n1 = n1_int, m1 = m1_int, n2 = n2_int, m2 = m2_int;
+    size_t n1 = static_cast<size_t>(n1_int), m1 = static_cast<size_t>(m1_int), n2 = static_cast<size_t>(n2_int), m2 = static_cast<size_t>(m2_int);
 
     // ввод матриц
     int **lhs = new_matrix(n1, m1);
